@@ -1,0 +1,46 @@
+/**index.wxss**/
+.hi {
+  height: 300rpx;
+  width: 300rpx;
+}
+
+.title{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.text {
+  color: gray;
+  font-size: medium;
+}
+
+.library_open{
+  display: flex;
+  font-size: 14px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;  
+  text-align: center;
+  height: 3rem;
+  width: 90%;
+  background-color: #00B26A;
+  margin-top: 0.5rem;
+  border-radius: 1ch;
+}
+
+.library_close{
+  display: flex;
+  font-size: 14px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;  
+  text-align: center;
+  height: 3rem;
+  width: 90%;
+  background-color: #f2f2f2;
+  color: gray;
+  margin-top: 0.5rem;
+  border-radius: 1ch;
+}

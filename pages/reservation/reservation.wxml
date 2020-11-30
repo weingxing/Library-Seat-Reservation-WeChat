@@ -1,0 +1,74 @@
+<!--pages/reservation/reservation.wxml-->
+<view class="center_container title">我的预约信息</view>
+<view wx:if="{{hasReservation}}">
+  <van-cell-group>
+    <van-field
+      value="{{seatInfo.libraryName}}"
+      label="书库名"
+      left-icon="home-o"
+      readonly
+      border="{{ true }}"
+    />
+  
+    <van-field
+      value="{{seatInfo.sid}}号 ({{seatInfo.position}})"
+      label="位置"
+      left-icon="location-o"
+      readonly
+      border="{{ true }}"
+    />
+  
+    <van-field
+      value="{{seat.date}}"
+      label="预约时间"
+      left-icon="clock-o"
+      readonly
+      border="{{ true }}"
+    />
+  
+    <van-field
+      value="{{seat.enterDate}}"
+      label="入馆时间"
+      left-icon="clock-o"
+      readonly
+      border="{{ true }}"
+    />
+  
+    <van-field
+      value="{{seat.leaveDate}}"
+      label="离馆时间"
+      left-icon="clock-o"
+      readonly
+      border="{{ true }}"
+    />
+
+    <!-- <van-field
+      value="{{seat.hour}} 分钟"
+      label="学习时长"
+      left-icon="underway-o"
+      readonly
+      border="{{ true }}"
+    /> -->
+
+    <van-field
+      value="{{seat.leaveNum}}"
+      label="离馆次数"
+      left-icon="ellipsis"
+      readonly
+      border="{{ true }}"
+    />
+  </van-cell-group>
+</view>
+<view class="btn_release" wx:if="{{!seat.leaveDate && hasReservation}}">
+  <button type="primary" bindtap="release">释放座位</button>
+</view>
+
+<view class="btn_release" wx:if="{{!seat.leaveDate && hasReservation && !seat.pause}}">
+  <button type="primary" bindtap="pause">暂时离开</button>
+</view>
+<view class="empty" wx:if="{{!hasReservation}}">
+  <image style="width: 50%" src='/images/empty.png'></image>
+  <view>
+    <text>无记录</text>
+  </view>
+</view>

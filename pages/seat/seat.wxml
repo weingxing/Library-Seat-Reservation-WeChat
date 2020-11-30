@@ -1,0 +1,87 @@
+<!--pages/seat/seat.wxml-->
+
+<view style='position:relative;z-index:10;'>
+  <!-- 顶部 title -->
+  <view style='border:#DCDCDC solid 2rpx;padding:30rpx 0rpx;background:white'>
+    <view style='margin-left:20rpx; font-size:30rpx; line-height:36rpx; font-weight:bold'>{{library}}</view>
+    <!-- <view style='margin-left:20rpx; font-size:24rpx;line-height:60rpx;'>2018-09-07 周五 20:00</view> -->
+  </view>
+
+  <!-- 中间标志 -->
+  <view class='view-price'>
+    <view class='view-price-num'>
+      <image class='view-price-img' src='/images/seat.png'></image>可选</view>
+    <view class='view-price-num'>
+      <image class='view-price-img' src='/images/noseat.png'></image>不可选</view>
+    <view class='view-price-num'>
+      <image class='view-price-img' src='/images/select.png'></image>已选</view>
+  </view>
+</view>
+
+<view style="height:100%" class='view-seat-all'>
+  <view class='view-seat-top-view'>
+    <view class='view-seat-top'>书库出口方向</view>
+  </view>
+  <movable-area style="height:{{movableheight}}rpx" class="view-seat-moa"   scale-area>
+    <movable-view style="height:{{movableheight-50}}rpx" class='view-seat-slide' direction="all" scale="true" scale-min='1.2' scale-max='3.5' scale-value="1.3" x="-100" bindchange="onChange" bindscale="onScale" bindtouchend="touchend" >
+      <view style='margin:80rpx 20rpx;' >
+        <!-- 座位 -->
+        <block wx:for="{{seatArr}}" wx:for-item="items" wx:for-index="id" wx:key="this">
+          <view class='view-seat-location'>
+            <!-- <view class='view-seat-index'>{{id+1}}</view> -->
+            <block wx:for="{{items}}" wx:for-item="item" wx:for-index="id1" wx:key="this">
+              <block wx:if="{{item.src=='no'}}">
+                <view class='view-seat-img'></view>
+              </block>
+              <block wx:else>
+                <image class='view-seat-img' mode="scaleToFill" src="/images/{{item.src}}" bindtap='bindGetLocation' data-x="{{id}}" data-y="{{id1}}" data-src='{{item.src}}'></image>
+              </block>
+            </block>
+          </view>
+        </block>
+      </view>
+    </movable-view>
+  </movable-area>
+</view>
+<!-- 浮动层 -->
+<!-- <view hidden="{{isHidden}}" style='width:{{floatwidth}}vw;height: {{floatheight}}vh;' class='view-seat-float'>
+  <view class='view-seat-float-text'>书库出口方向</view>
+  <view  class='view-seat-float-seat'>
+    <canvas style='  width: {{cawidth}}vw;height: {{caheigth}}vh;top: {{top}}rpx;left:{{left}}rpx;' class='view-seat-float-canvas' canvas-id="firstCanvas"></canvas>
+
+        <block wx:for="{{seatArr}}" wx:for-item="items" wx:for-index="id" wx:key="this">
+          <view class='view-seat-float-location'>
+            <view class='view-seat-float-index'>{{id+1}}</view>
+            <block wx:for="{{items}}" wx:for-item="item" wx:for-index="id1" wx:key="this">
+              <block wx:if="{{item.num%5==0||item.src=='no'}}">
+                <view class='view-seat-float-img'></view>
+              </block>
+              <block wx:else>
+                <image class='view-seat-float-img' src="/images/{{item.src}}" data-src='{{item.src}}'></image>
+              </block>
+            </block>
+          </view>
+        </block>
+  </view>
+</view> -->
+
+<!-- 底部 -->
+<view class='view-seat-end'>
+  <view wx:if="{{selectArr.length==0}}" style='width:30%'>
+    <image class='view-seat-end-img' style='width:60rpx;height:60rpx;' src='/images/seat.png'></image>
+  </view>
+  <view wx:else style='width:30%'>
+    <image class='view-seat-end-imgs' style='width:60rpx;height:60rpx;' src='/images/seatss.png'></image>
+    <view class='view-seat-end-imgs-text'>{{selectArr.length}}</view>
+  </view>
+  <view wx:if="{{selectArr.length==0}}" class='view-seat-end-center'>
+    <view class='view-seat-end-center-text'>请点击座位区域选择位置</view>
+  </view>
+
+  <view wx:else bindtap='bindShowSeat' class='view-seat-end-center'>
+    <view class='view-seat-end-center-text-price'>{{selectArr[0].x}}排 {{selectArr[0].y}}座</view>
+  </view>
+  <view class="center_container">
+    <button class='view-seat-end-btn' bindtap="submit">确认选座</button>
+  </view>
+</view>

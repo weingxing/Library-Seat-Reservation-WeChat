@@ -1,0 +1,19 @@
+/* pages/reservation/reservation.wxss */
+.title {
+  background-color: #00B26A;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.btn_release {
+  margin-top: 1.5rem;
+}
+
+.empty {
+  display:flex;
+  flex-direction: column;
+  margin-top: 100rpx;
+  height: 100%;
+  align-items:center;
+ }

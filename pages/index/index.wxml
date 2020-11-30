@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view>
+  <view class="center_container">
+   <image class="hi" src="/images/hi.png"></image>
+  </view>
+  <view class="center_container text">今日已有<van-tag color="gray">{{number}}</van-tag>位同学开始学习</view>
+
+  <view class="title">
+    <van-tag plain size="large" type="primary">请选择要预约的书库</van-tag>
+  </view>
+
+  <view>
+  <view wx:for="{{library}}" wx:key="index">
+    <block wx:if="{{item.status == 'opening'}}">
+      <view class="center_container">
+        <view class="library_open" bindtap="chooseSeat" data-id="{{item.lid}}"  data-name="{{item.libraryName}}">
+          {{item.libraryName}}（开放）
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="center_container">
+        <view class="library_close" bindtap="closed">{{item.libraryName}}（未开放）</view>
+      </view>
+    </block>
+  </view>
+  </view>
+</view>

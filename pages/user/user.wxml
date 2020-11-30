@@ -1,0 +1,32 @@
+<!--pages/user/user.wxml-->
+<view>
+  <view class="userinfo">
+    <button class="btn_login" wx:if="{{!hasUserInfo && canIUse}}" type='primary' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登 录</button>
+    <block wx:elif="{{hasUserInfo}}">
+      <open-data type="userAvatarUrl" class="avatar"></open-data>
+      <open-data type="userNickName" style="margin-top: 0.5rem"></open-data>
+    </block>
+  </view>
+</view>
+
+<view class="menu">
+  <van-cell-group>  
+  
+    <van-cell title="我的信誉" value="{{score}}" bind:click="score" />
+    <van-cell is-link icon="star-o" title="我的预约" bind:click="reservation"/>
+    <van-cell is-link icon="orders-o" title="预约规则" bind:click="rule"/>
+    <van-cell is-link icon="share" title="分享小程序" bind:click="share"/>
+    <van-cell is-link icon="warning-o" title="关 于" bind:click="about"/>
+  </van-cell-group>
+
+  <van-popup show="{{ show }}" round  closeable position="bottom" 
+    close-icon="close" custom-style="height: 40%" bind:close="onClose">
+    <text class="text_content">
+      1. 每人每次仅可预约一个座位，信誉值低于60分将不可预约座位。\n
+      2. 预约后须30分钟内到达图书馆签到，否则取消预约并扣除2信誉值。\n
+      3. 外出时要在小程序设置状态为暂离且离开时间不得超过90分钟，否则扣除信誉值2分。 \n
+      4. 未设置暂时离开状态的，扣除5信誉值。\n
+      5. 被举报者经核实扣除5信誉值。
+    </text>
+  </van-popup>
+</view>
